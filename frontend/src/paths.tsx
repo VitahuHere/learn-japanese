@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy } from "react";
 
-export const root = "http://localhost:8000";
+export const root = "http://159.89.9.209:8008";
 
 export const Paths = {
   hiragana: "/hiragana",
