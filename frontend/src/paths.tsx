@@ -13,7 +13,7 @@ export const Paths = {
 
 const ModePickerPage = lazy(() => import("./pages/ModePickerPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const HiraganaPage = lazy(() => import("./pages/HiraganaPage"));
+const CardPage = lazy(() => import("./pages/CardPage"));
 
 const HiraganaPickEndpoints = [
   {
@@ -60,10 +60,10 @@ export default function Router() {
               />
             }
           />
-          <Route path={Paths.hiraRoma} element={<HiraganaPage />} />
-          <Route path={Paths.romaHira} element={<HiraganaPage />} />
+          <Route path={Paths.hiraRoma} element={<CardPage />} />
+          <Route path={Paths.romaHira} element={<CardPage />} />
         </Route>
-        <Route path={Paths.words} element={<HiraganaPage />} />
+        <Route path={Paths.words} element={<CardPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
