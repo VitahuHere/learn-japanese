@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Depends
+from decouple import config
+from fastapi import FastAPI, Depends, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
@@ -16,7 +17,10 @@ def get_db():
 
 
 Base.metadata.create_all(bind=engine)
-app = FastAPI()
+app = FastAPI(
+    root_path="/api",
+)
+router = APIRouter(prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,6 +31,20 @@ app.add_middleware(
 )
 
 
-@app.get("/cards/random")
+@router.get("/cards/random")
 async def random_card(db: Session = Depends(get_db)):
     return get_random_hiragana(db)
+
+
+app.include_router(router)
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=443,
+        ssl_certfile=config("SSL_CERTFILE"),
+        ssl_keyfile=config("SSL_KEYFILE"),
+    )

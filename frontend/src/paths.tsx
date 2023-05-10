@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy } from "react";
 
-export const root = "https://learnjpvitah.me:8008";
+export const root = "https://learnjpvitah.me/api";
 
 export const Paths = {
   hiragana: "/hiragana",
