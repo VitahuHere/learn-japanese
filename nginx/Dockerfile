@@ -1,3 +1,3 @@
 FROM nginx
 
-COPY ./nginx.conf /etc/nginx/conf.d/learnjpvitah.conf
+COPY ./nginx.conf /etc/nginx/conf.d/nginx.conf
