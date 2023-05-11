@@ -22,7 +22,9 @@ services:
       - src/.env
   nginx:
     container_name: nginx
-    image: nginx:latest
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     restart: always
     depends_on:
       - backend
