@@ -1,3 +1,4 @@
+from decouple import config
 from fastapi import FastAPI, Depends, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -44,5 +45,6 @@ if __name__ == "__main__":
         app,
         host="0.0.0.0",
         port=8000,
-
+        ssl_certfile=config("SSL_CERTFILE"),
+        ssl_keyfile=config("SSL_KEYFILE"),
     )
