@@ -5,6 +5,8 @@ services:
     container_name: fastapi
     build: ./src
     command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python3 /app/src/main.py'
+    ports:
+      - "8000:8000"
     volumes:
       - .:/app
       - /etc/letsencrypt:/etc/letsencrypt
