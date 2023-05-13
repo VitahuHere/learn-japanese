@@ -14,13 +14,6 @@ services:
       - src/.env
     depends_on:
       - db
-  frontend:
-    container_name: frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes:
-      - /var/www/learnjpvitah/dist:/app/dist
   db:
     container_name: pgdb
     image:
