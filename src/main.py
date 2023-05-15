@@ -2,9 +2,10 @@ from fastapi import FastAPI, Depends, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from crud import get_random_hiragana
-from database import engine, SessionLocal
-from models import Base
+from crud.katakana import get_random_katakana
+from crud.words import get_random_word
+from database import engine, SessionLocal, Base
+from src.crud import get_random_hiragana
 
 
 def get_db():
@@ -30,9 +31,25 @@ app.add_middleware(
 )
 
 
-@router.get("/cards/random")
-async def random_card(db: Session = Depends(get_db)):
+@router.get("/cards/hiragana/random")
+async def random_hiragana_card(db: Session = Depends(get_db)):
     return get_random_hiragana(db)
+
+
+@router.get("/cards/katakana/random")
+async def random_katakana_card(db: Session = Depends(get_db)):
+    return get_random_katakana(db)
+
+
+@router.get("/cards/words/random")
+async def random_word_card(db: Session = Depends(get_db)):
+    return get_random_word(db)
+
+
+# @router.post("/cards/load")
+# async def load_cards(db: Session = Depends(get_db)):
+#     load_katakana(db)
+#     load_words(db)
 
 
 app.include_router(router)

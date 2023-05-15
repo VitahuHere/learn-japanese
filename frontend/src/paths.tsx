@@ -1,19 +1,39 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy } from "react";
+import HiraRomaCard from "./components/Card/HiraRomaCard";
+import RomaHiraCard from "./components/Card/RomaHiraCard";
+import WordCard from "./components/Card/WordCard";
+import KataRomaCard from "./components/Card/KataRomaCard";
+import RomaKataCard from "./components/Card/RomaKataCard";
 
-export const root = "https://learnjpvitah.me/api";
+export const root = "http://localhost:8000/api";
 
 export const Paths = {
   hiragana: "/hiragana",
   hiraRoma: "hira-roma",
   romaHira: "roma-hira",
+  katakana: "/katakana",
+  kataRoma: "kata-roma",
+  romaKata: "roma-kata",
   words: "/words",
-  randomHiraganaCard: "/cards/random",
+  randomHiraganaCard: "/cards/hiragana/random",
+  randomKatakanaCard: "/cards/katakana/random",
+  randomWordCard: "/cards/words/random",
 };
 
 const ModePickerPage = lazy(() => import("./pages/ModePickerPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const CardPage = lazy(() => import("./pages/CardPage"));
+
+const HomeEndpoints = [
+  {
+    path: Paths.hiragana,
+    text: "Hiragana",
+    description: "Learn Hiragana",
+  },
+  { path: Paths.katakana, text: "Katakana", description: "Learn Katakana" },
+  { path: Paths.words, text: "Words", description: "Learn Japanese words" },
+];
 
 const HiraganaPickEndpoints = [
   {
@@ -28,13 +48,17 @@ const HiraganaPickEndpoints = [
   },
 ];
 
-const HomeEndpoints = [
+const KatakanaPickEndpoints = [
   {
-    path: Paths.hiragana,
-    text: "Hiragana",
-    description: "Learn Hiragana characters",
+    path: Paths.kataRoma,
+    text: "Katakana to Romaji",
+    description: "Read Katakana and write in Romaji",
   },
-  { path: Paths.words, text: "Words", description: "Learn Japanese words" },
+  {
+    path: Paths.romaKata,
+    text: "Romaji to Katakana",
+    description: "Read Romaji and write in Katakana",
+  },
 ];
 
 export default function Router() {
@@ -60,10 +84,35 @@ export default function Router() {
               />
             }
           />
-          <Route path={Paths.hiraRoma} element={<CardPage />} />
-          <Route path={Paths.romaHira} element={<CardPage />} />
+          <Route
+            path={Paths.hiraRoma}
+            element={<CardPage Card={HiraRomaCard} />}
+          />
+          <Route
+            path={Paths.romaHira}
+            element={<CardPage Card={RomaHiraCard} />}
+          />
         </Route>
-        <Route path={Paths.words} element={<CardPage />} />
+        <Route path={Paths.katakana}>
+          <Route
+            index
+            element={
+              <ModePickerPage
+                headerText="Learn Japanese Katakana"
+                endpoints={KatakanaPickEndpoints}
+              />
+            }
+          />
+          <Route
+            path={Paths.kataRoma}
+            element={<CardPage Card={KataRomaCard} />}
+          />
+          <Route
+            path={Paths.romaKata}
+            element={<CardPage Card={RomaKataCard} />}
+          />
+        </Route>
+        <Route path={Paths.words} element={<CardPage Card={WordCard} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

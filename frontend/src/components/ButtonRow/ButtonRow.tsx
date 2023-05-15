@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { ButtonLink } from "../../types/ButtonLink";
+import { ButtonLinkType } from "../../types/ButtonLinkType";
 
-export function ButtonRow({ paths }: { paths: ButtonLink[] }) {
+export function ButtonRow({ paths }: { paths: ButtonLinkType[] }) {
   return (
     <>
       {paths.map((path) => {
         return (
-          <div className="flex flex-col space-y-5 items-center">
+          <div className="flex flex-col space-y-5 items-center" key={path.path}>
             <label className="text-white text-xl">{path.description}</label>
             <Link
               to={path.path}
