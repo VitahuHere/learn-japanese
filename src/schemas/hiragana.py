@@ -6,7 +6,7 @@ class HiraganaBase(BaseModel):
     romaji: str
 
 
-class HiraganaCreate(HiraganaBase):
+class CreateHiragana(HiraganaBase):
     class Config:
         orm_mode = True
 
@@ -16,8 +16,3 @@ class GetHiragana(HiraganaBase):
 
     class Config:
         orm_mode = True
-
-
-class PostAnswer(BaseModel):
-    id: int
-    romaji: str

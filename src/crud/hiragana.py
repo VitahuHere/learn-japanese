@@ -2,10 +2,10 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from models import Hiragana
-from schemas import HiraganaCreate
+from schemas import CreateHiragana
 
 
-def create_hiragana(db: Session, hiragana: HiraganaCreate):
+def create_hiragana(db: Session, hiragana: CreateHiragana):
     db_hiragana = Hiragana(hiragana=hiragana.hiragana, romaji=hiragana.romaji)
     db.add(db_hiragana)
     db.commit()
