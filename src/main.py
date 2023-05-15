@@ -46,12 +46,6 @@ async def random_word_card(db: Session = Depends(get_db)):
     return get_random_word(db)
 
 
-# @router.post("/cards/load")
-# async def load_cards(db: Session = Depends(get_db)):
-#     load_katakana(db)
-#     load_words(db)
-
-
 app.include_router(router)
 
 if __name__ == "__main__":
