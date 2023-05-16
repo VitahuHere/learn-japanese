@@ -6,7 +6,8 @@ import WordCard from "./components/Card/WordCard";
 import KataRomaCard from "./components/Card/KataRomaCard";
 import RomaKataCard from "./components/Card/RomaKataCard";
 
-export const root = "https://learnjpvitah.me/api";
+export const root = `${import.meta.env.VITE_HOST_URL}/api`;
+console.log(root);
 
 export const Paths = {
   hiragana: "/hiragana",

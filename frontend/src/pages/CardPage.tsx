@@ -8,7 +8,7 @@ export default function CardPage({ Card }: { Card: FC }) {
         <div className="flex flex-col items-center pt-5 pb-4 w-fit text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-red-600">
           Learn Japanese
         </div>
-        <main className="flex flex-col h-full">
+        <main className="flex flex-col">
           <Card />
         </main>
       </div>

@@ -12,6 +12,7 @@ export default function Card(
     answer: [],
   } as CardType);
   const [questionBgColor, setQuestionBgColor] = useState("bg-white");
+  const [answerTextColor, setAnswerTextColor] = useState("text-black");
   const answerBox = useRef<HTMLInputElement>(null);
 
   function updateCard() {
@@ -27,18 +28,25 @@ export default function Card(
   function handleSubmit(event: React.FormEvent<CardFormElement>) {
     event.preventDefault();
     const inputAnswer = event.currentTarget.answer.value;
+    let time = 300;
     if (card.answer.includes(inputAnswer.toLowerCase())) {
       setQuestionBgColor("bg-green-700");
     } else {
       setQuestionBgColor("bg-red-700");
+      setAnswerTextColor("text-white");
+      time = 1500;
     }
+    setCard({
+      id: card.id,
+      question: card.answer.map((answer) => answer).join(", "),
+      answer: card.question.split(", "),
+    });
     setTimeout(() => {
       setQuestionBgColor("bg-white");
-    }, 300);
-    if (answerBox.current != null) {
-      answerBox.current.value = "";
-    }
-    updateCard();
+      setAnswerTextColor("text-black");
+      answerBox.current!.value = "";
+      updateCard();
+    }, time);
   }
 
   return (
@@ -47,7 +55,9 @@ export default function Card(
       <div
         className={
           "flex justify-center items-center max-w-xl rounded-md " +
-          questionBgColor
+          questionBgColor +
+          " " +
+          answerTextColor
         }
       >
         <span className="text-4xl py-5">{card.question}</span>
